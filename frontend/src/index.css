@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * IncCorpAI design tokens
+ * ledger paper ground, official-ink text, registry-cloth green for actions,
+ * rubber-stamp violet for citations and filed steps, amber for notices.
+ */
+@layer base {
+  :root {
+    --paper: 244 246 245;        /* #F4F6F5 */
+    --sheet: 255 255 255;
+    --ink: 20 33 61;             /* #14213D */
+    --ink-soft: 71 84 110;       /* #47546E */
+    --ink-faint: 122 134 155;    /* #7A869B */
+    --rule: 214 222 219;         /* #D6DEDB */
+    --registry: 14 107 92;       /* #0E6B5C */
+    --registry-deep: 9 78 67;    /* #094E43 */
+    --registry-wash: 226 240 236;
+    --stamp: 75 63 168;          /* #4B3FA8 */
+    --stamp-wash: 236 234 250;
+    --notice: 181 71 8;          /* #B54708 */
+    --notice-wash: 254 243 226;
+  }
+
+  html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  body { @apply bg-paper font-sans text-base text-ink; font-feature-settings: "tnum" 0; }
+
+  :focus-visible { outline: 2px solid rgb(var(--registry)); outline-offset: 2px; border-radius: 4px; }
+
+  ::selection { background: rgb(var(--stamp) / 0.18); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 1ms !important; transition-duration: 1ms !important; }
+  }
+}
+
+@layer components {
+  /* Answer typography: serif, generous leading, tables like statutory schedules */
+  .answer { @apply font-serif text-[1.03rem] leading-[1.72] text-ink; }
+  .answer p { @apply my-3; }
+  .answer strong { @apply font-semibold; }
+  .answer ul { @apply my-3 list-disc space-y-1.5 pl-5 marker:text-ink-faint; }
+  .answer ol { @apply my-3 list-decimal space-y-1.5 pl-5 marker:text-ink-faint marker:font-sans marker:text-sm; }
+  .answer h1, .answer h2, .answer h3 { @apply mb-2 mt-5 font-sans font-semibold text-ink; }
+  .answer h2 { @apply text-lg; }
+  .answer h3 { @apply text-base; }
+  .answer em { @apply text-ink-soft; }
+  .answer code { @apply rounded bg-paper px-1 py-0.5 font-sans text-[0.85em]; }
+  .answer table { @apply my-4 w-full border-collapse font-sans text-sm; }
+  .answer th { @apply border-b-2 border-ink/70 px-2 py-1.5 text-left font-semibold; }
+  .answer td { @apply border-b border-rule px-2 py-1.5 align-top; }
+  .answer a:not(.cite) { @apply text-registry underline decoration-registry/40 underline-offset-2 hover:decoration-registry; }
+
+  .scroll-quiet { scrollbar-width: thin; scrollbar-color: rgb(var(--rule)) transparent; }
+}
